@@ -75,12 +75,12 @@ class Driver(metaclass=ABCMeta):
 
         return self
 
-    def store(self):
+    def store(self, observation_table):
         """
         Store the observations into database using
         Storager strategy
         """
-        self.storager.store_observations(self._data_sets)
+        self.storager.store_observations(self._data_sets, observation_table)
 
 class CSV(Driver):
     """Defines a Base class for handle CSV data files

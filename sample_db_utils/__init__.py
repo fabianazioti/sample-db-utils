@@ -9,5 +9,7 @@
 """Python Sample Database Utils."""
 
 from .version import __version__
+from .core.postgis_accessor import PostgisAccessor
+from .drives.inSitu import InSitu
 
-__all__ = ('__version__',)
+__all__ = ('__version__', 'InSitu', 'PostgisAccessor')

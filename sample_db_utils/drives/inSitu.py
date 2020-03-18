@@ -9,7 +9,7 @@
 """ InSitu Class."""
 
 import os
-from sample_db_utils.core.driver import CSV
+from ..core.driver import CSV
 
 class InSitu(CSV):
     """

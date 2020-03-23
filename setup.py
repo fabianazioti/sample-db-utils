@@ -45,8 +45,10 @@ setup_requires = [
 
 packages = find_packages()
 
+r_data = os.path.join('sample_db_utils', '/drives/r-scripts/*.R')
+
 package_data = {
-                   'r-package': ['*.r', '*.R']
+                   'r-package': r_data,
 },
 
 with open(os.path.join('sample_db_utils', 'version.py'), 'rt') as fp:

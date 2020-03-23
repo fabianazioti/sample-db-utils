@@ -192,8 +192,8 @@ class CSV(Driver):
                 "name": class_name,
                 "description": class_name,
                 "code": class_name,
-                "classification_system_id": self.system.id,
-                "user_id": self.user
+                "class_system_id": self.system.id,
+                # "user_id": self.user
             }
 
             samples_to_save.append(sample_class)

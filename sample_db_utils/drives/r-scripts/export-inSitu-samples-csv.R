@@ -18,7 +18,7 @@ outputFolder = args[1]
 library("inSitu")
 list_datasets()
 data("br_mt_1_8K_9classes_6bands.rda")
-data("amazonia_33K_12classes_4bands.rda")
+# data("amazonia_33K_12classes_4bands.rda")
 # data("br_mt_2K_9classes_6bands.rda")
 # data("cerrado_124K_16classes_6bands.rda")
 # data("cerrado_64K_13classes_6bands.rda")

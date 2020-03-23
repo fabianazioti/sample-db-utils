@@ -8,19 +8,12 @@
 
 """This file contains Brazil Data Cube drivers to list the sample and store in database."""
 
-import logging
 import os
 from abc import abstractmethod, ABCMeta
 from copy import deepcopy
-from pathlib import Path
-from tempfile import TemporaryDirectory
-from osgeo import ogr, osr
 import pandas as pd
-from geoalchemy2 import shape
 from geopandas import GeoDataFrame
 from shapely.geometry import Point
-from shapely.wkt import loads as geom_from_wkt
-from werkzeug.datastructures import FileStorage
 
 from sample_db_utils.core.postgis_accessor import PostgisAccessor
 from sample_db_utils.core.utils import validate_mappings, unzip, is_stream, reproject

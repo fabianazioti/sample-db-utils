@@ -45,6 +45,8 @@ setup_requires = [
 
 packages = find_packages()
 
+package_data = {'': ['*.r', '*.R']},
+
 with open(os.path.join('sample_db_utils', 'version.py'), 'rt') as fp:
     g = {}
     exec(fp.read(), g)
@@ -62,6 +64,7 @@ setup(
     url='https://github.com/brazil-data-cube/sample-db-utils.git',
     packages=packages,
     zip_safe=False,
+    package_data=package_data,
     include_package_data=True,
     platforms='any',
     entry_points={

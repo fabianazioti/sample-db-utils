@@ -191,6 +191,7 @@ class CSV(Driver):
             sample_class = {
                 "class_name": class_name,
                 "description": class_name,
+                "code": class_name,
                 "classification_system_id": self.system.id,
                 "user_id": self.user
             }

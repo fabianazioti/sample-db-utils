@@ -48,8 +48,11 @@ packages = find_packages()
 r_data = os.path.join('sample_db_utils', '/drives/r-scripts/*.R')
 
 package_data = {
-                   'r-package': [r_data],
-},
+    'r-scripts': [r_data,
+                  ],
+}
+
+
 
 with open(os.path.join('sample_db_utils', 'version.py'), 'rt') as fp:
     g = {}

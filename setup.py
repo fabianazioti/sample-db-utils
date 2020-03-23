@@ -45,7 +45,9 @@ setup_requires = [
 
 packages = find_packages()
 
-package_data = {'': ['*.r', '*.R']},
+package_data = {
+                   'r-package': ['*.r', '*.R']
+},
 
 with open(os.path.join('sample_db_utils', 'version.py'), 'rt') as fp:
     g = {}

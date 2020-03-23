@@ -33,7 +33,7 @@ class PostgisAccessor(object):
             data_sets (dict[]): List of data sets observation to store
         """
         db.engine.execute(
-            observation_table.__table__.insert(),
+            observation_table.insert(),
             data_sets
         )
         db.session.commit()

@@ -151,6 +151,7 @@ class CSV(Driver):
         geocsv['user_id'] = self.user
         geocsv['start_date'] = start_date
         geocsv['end_date'] = end_date
+        geocsv['collection_date'] = end_date
 
         del geocsv['geometry']
         del geocsv['latitude']

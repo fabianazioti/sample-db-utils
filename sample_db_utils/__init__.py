@@ -10,7 +10,10 @@
 
 from .version import __version__
 from .core.postgis_accessor import PostgisAccessor
+from .core.driver import CSV, Shapefile
 from .drives.inSitu import InSitu
+from .drives.bdc import BDC
 from .drives.factory_driver import DriversFactory
 
-__all__ = ('__version__', 'InSitu', 'PostgisAccessor', 'DriversFactory', )
+__all__ = ('__version__', 'InSitu', 'PostgisAccessor', 'DriversFactory', 'CSV', 'Shapefile',
+           'BDC',)

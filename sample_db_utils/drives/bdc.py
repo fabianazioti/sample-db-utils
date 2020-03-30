@@ -14,15 +14,12 @@ class BDC(Shapefile):
 
     def __init__(self, entries, storager, **kwargs):
 
-        invalid_parameters = set(kwargs) - {"start_date", "end_date"}
-        if invalid_parameters:
-            raise AttributeError('invalid parameter(s): {}'.format(invalid_parameters))
-
         mappings = dict(
             class_name="label",
-            start_date=dict(value=kwargs['start_date']),
-            end_date=dict(value=kwargs['end_date']),
+            start_date=dict(value='31/08/2019'),
+            end_date=dict(value='01/09/2018'),
             collection_date= None
         )
 
         super(BDC, self).__init__(entries, mappings, storager, **kwargs)
+

@@ -17,7 +17,7 @@ class DriversFactory:
     @staticmethod
     def make(driverType, entries, storager):
         """Factory method for creates datasource."""
-        factorys = ["Cerrado", "VMaus", "Canasat", "Lapig", "Fototeca" , "Embrapa", "InSitu"]
+        factorys = ["Cerrado", "VMaus", "Canasat", "Lapig", "Fototeca" , "Embrapa", "InSitu", "BDC"]
 
         assert driverType in factorys
 

@@ -341,6 +341,7 @@ class Shapefile(Driver):
             sample_class = {
                 "name": class_name,
                 "description": class_name,
+                "code": class_name,
                 "class_system_id": self.system.id,
                 # "user_id": self.user
             }

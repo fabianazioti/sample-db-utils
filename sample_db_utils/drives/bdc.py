@@ -12,7 +12,7 @@ from ..core.driver import Shapefile
 class BDC(Shapefile):
     """Driver for data loading to `sampledb`"""
 
-    def __init__(self, entries, **kwargs):
+    def __init__(self, entries, storage, **kwargs):
 
         invalid_parameters = set(kwargs) - {"start_date", "end_date"}
         if invalid_parameters:

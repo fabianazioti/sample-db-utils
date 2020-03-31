@@ -300,25 +300,48 @@ class Shapefile(Driver):
         }
 
     def load(self, file):
-        gdal_file = ogr.Open(file)
+
+        driver = ogr.GetDriverByName("ESRI Shapefile")
+
+        gdal_file = driver.Open(file, 0)
+        # gdal_file = ogr.Open(file)
 
         self.load_classes(gdal_file)
 
-        for layer_id in range(gdal_file.GetLayerCount()):
-            layer = gdal_file.GetLayer(layer_id)
+        layer = gdal_file.GetLayer()
 
-            spatial_ref = layer.GetSpatialRef()
+        spatial_ref = layer.GetSpatialRef()
 
-            if spatial_ref is None:
-                spatial_ref = osr.SpatialReference()
-                spatial_ref.ImportFromEPSG(4326)
-                logging.info('Dataset {} does not have projection. Using EPSG:4326...'.format(file))
+        if spatial_ref is None:
+            spatial_ref = osr.SpatialReference()
+            spatial_ref.ImportFromEPSG(4326)
+            logging.info('Dataset {} does not have projection. Using EPSG:4326...'.format(file))
 
-            self.crs = spatial_ref.ExportToProj4()
+        self.crs = spatial_ref.ExportToProj4()
 
-            for feature in layer:
-                dataset = self.build_data_set(feature, **{"layer": layer})
-                self._data_sets.append(dataset)
+
+        for feature in layer:
+           dataset = self.build_data_set(feature, **{"layer": layer})
+           if(dataset):
+               self._data_sets.append(dataset)
+           else:
+               raise print("Dataset error")
+
+        # for layer_id in range(gdal_file.GetLayerCount()):
+        #     layer = gdal_file.GetLayer(layer_id)
+        #
+        #     spatial_ref = layer.GetSpatialRef()
+        #
+        #     if spatial_ref is None:
+        #         spatial_ref = osr.SpatialReference()
+        #         spatial_ref.ImportFromEPSG(4326)
+        #         logging.info('Dataset {} does not have projection. Using EPSG:4326...'.format(file))
+        #
+        #     self.crs = spatial_ref.ExportToProj4()
+        #
+        #     for feature in layer:
+        #         dataset = self.build_data_set(feature, **{"layer": layer})
+        #         self._data_sets.append(dataset)
 
     def load_classes(self, file):
         # Retrieves Layer Name from Data set filename

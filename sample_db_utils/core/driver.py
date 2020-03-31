@@ -291,7 +291,9 @@ class Shapefile(Driver):
         collection_date = self.mappings['collection_date'].get('value') or \
             feature.GetField(self.mappings['collection_date']['key'])
 
-        class_id = self.storager.samples_map_id[feature.GetField(self.mappings['class_name'])]
+        class_name = feature.GetField(self.mappings['class_name'])
+
+        class_id = self.storager.samples_map_id[class_name]
 
         return {
             "start_date": start_date,

@@ -288,8 +288,10 @@ class Shapefile(Driver):
         end_date = self.mappings['end_date'].get('value') or \
             feature.GetField(self.mappings['end_date']['key'])
 
-        collection_date = self.mappings['collection_date'].get('value') or \
-            feature.GetField(self.mappings['collection_date']['key'])
+        # collection_date = self.mappings['collection_date'].get('value') or \
+        #     feature.GetField(self.mappings['collection_date']['key'])
+
+        collection_date = None
 
         class_name = feature.GetField(self.mappings['class_name'])
 

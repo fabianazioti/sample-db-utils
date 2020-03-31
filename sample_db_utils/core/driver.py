@@ -320,47 +320,21 @@ class Shapefile(Driver):
 
             self.load_classes(dataSource)
 
-            layer = dataSource.GetLayer()
-            featureCount = layer.GetFeatureCount()
-            print("Number of features in {}: {}".format(file, featureCount))
+            for layer_id in range(dataSource.GetLayerCount()):
+                layer = dataSource.GetLayer(layer_id)
 
-            spatial_ref = layer.GetSpatialRef()
+                spatial_ref = layer.GetSpatialRef()
 
-            if spatial_ref is None:
-                spatial_ref = osr.SpatialReference()
-                spatial_ref.ImportFromEPSG(4326)
-                logging.info('Dataset {} does not have projection. Using EPSG:4326...'.format(file))
+                if spatial_ref is None:
+                    spatial_ref = osr.SpatialReference()
+                    spatial_ref.ImportFromEPSG(4326)
+                    logging.info('Dataset {} does not have projection. Using EPSG:4326...'.format(file))
 
-            self.crs = spatial_ref.ExportToProj4()
+                self.crs = spatial_ref.ExportToProj4()
 
-            for feature in layer:
-                print(feature.GetField("label"))
-                dataset = self.build_data_set(feature, **{"layer": layer})
-
-                if dataset is None:
-                    raise print("Dataset Error")
-                else:
-                    print("Dataset: {}".format(dataset))
+                for feature in layer:
+                    dataset = self.build_data_set(feature, **{"layer": layer})
                     self._data_sets.append(dataset)
-
-
-
-
-        # for layer_id in range(gdal_file.GetLayerCount()):
-        #     layer = gdal_file.GetLayer(layer_id)
-        #
-        #     spatial_ref = layer.GetSpatialRef()
-        #
-        #     if spatial_ref is None:
-        #         spatial_ref = osr.SpatialReference()
-        #         spatial_ref.ImportFromEPSG(4326)
-        #         logging.info('Dataset {} does not have projection. Using EPSG:4326...'.format(file))
-        #
-        #     self.crs = spatial_ref.ExportToProj4()
-        #
-        #     for feature in layer:
-        #         dataset = self.build_data_set(feature, **{"layer": layer})
-        #         self._data_sets.append(dataset)
 
     def load_classes(self, file):
         # Retrieves Layer Name from Data set filename

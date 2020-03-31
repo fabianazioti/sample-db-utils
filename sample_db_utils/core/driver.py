@@ -335,12 +335,11 @@ class Shapefile(Driver):
                 print(feature.GetField("label"))
                 dataset = self.build_data_set(feature, **{"layer": layer})
 
-                if(dataset):
+                if dataset is None:
+                    raise print("Dataset Error")
+                else:
                     print("Dataset: {}".format(dataset))
                     self._data_sets.append(dataset)
-
-                else:
-                    raise print("Dataset Error")
 
 
 

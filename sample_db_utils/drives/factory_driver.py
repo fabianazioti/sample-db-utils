@@ -9,18 +9,19 @@
 """ Sample DB Utils Drives Factory"""
 
 from .inSitu import InSitu
+from .bdc import BDC
 
 
 class DriversFactory:
     """Factory for Drives."""
 
     @staticmethod
-    def make(driverType, entries, storager):
+    def make(driverType, entries, storager, **kwargs):
         """Factory method for creates datasource."""
-        factorys = ["Cerrado", "VMaus", "Canasat", "Lapig", "Fototeca" , "Embrapa", "InSitu"]
+        factorys = ["Cerrado", "VMaus", "Canasat", "Lapig", "Fototeca" , "Embrapa", "InSitu",  "BDC"]
 
         assert driverType in factorys
 
-        driver = eval(driverType)(entries, storager)
+        driver = eval(driverType)(entries, storager, **kwargs)
 
         return driver

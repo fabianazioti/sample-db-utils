@@ -336,6 +336,8 @@ class Shapefile(Driver):
                     dataset = self.build_data_set(feature, **{"layer": layer})
                     self._data_sets.append(dataset)
 
+                print("\tDataset: {}".format(self._data_sets.append[0]))
+
     def load_classes(self, file):
         # Retrieves Layer Name from Data set filename
         layer_name = Path(file.GetName()).stem

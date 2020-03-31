@@ -272,7 +272,6 @@ class Shapefile(Driver):
 
     def build_data_set(self, feature, **kwargs):
         """Build data set sample observation"""
-        print("Entrou")
         geometry = feature.GetGeometryRef()
 
         reproject(geometry, self.crs, 4326)

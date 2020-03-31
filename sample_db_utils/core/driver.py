@@ -318,6 +318,8 @@ class Shapefile(Driver):
         else:
             print("Open {}".format(file))
 
+            self.load_classes(dataSource)
+
             layer = dataSource.GetLayer()
             featureCount = layer.GetFeatureCount()
             print("Number of features in {}: {}".format(file, featureCount))

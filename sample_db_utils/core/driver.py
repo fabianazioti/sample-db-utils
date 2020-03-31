@@ -289,37 +289,31 @@ class Shapefile(Driver):
             feature.GetField(self.mappings['end_date']['key'])
 
         # TODO
-        collection_date = None
-
-        class_name = feature.GetField(self.mappings['class_name'])
-
-        class_id = self.storager.samples_map_id[class_name]
+        collection_date = self.mappings['collection_date']
 
         return {
             "start_date": start_date,
             "end_date": end_date,
             "collection_date": collection_date,
             "location": ewkt,
-            "class_id": class_id ,
+            "class_id": self.storager.samples_map_id[feature.GetField(self.mappings['class_name'])] ,
             "user_id": self.user
         }
 
     def load(self, file):
 
-        driver = ogr.GetDriverByName("ESRI Shapefile")
-
-        dataSource = driver.Open(file, 0)
+        dataSource = ogr.Open(file)
 
         # Check to see if shapefile is found.
         if dataSource is None:
-            print("Could not open {}".format(file))
+            raise Exception("Could not open {}".format(file))
         else:
             self.load_classes(dataSource)
 
             for layer_id in range(dataSource.GetLayerCount()):
-                layer = dataSource.GetLayer(layer_id)
+                gdal_layer = dataSource.GetLayer(layer_id)
 
-                spatial_ref = layer.GetSpatialRef()
+                spatial_ref = gdal_layer.GetSpatialRef()
 
                 if spatial_ref is None:
                     spatial_ref = osr.SpatialReference()
@@ -328,8 +322,10 @@ class Shapefile(Driver):
 
                 self.crs = spatial_ref.ExportToProj4()
 
-                for feature in layer:
-                    dataset = self.build_data_set(feature, **{"layer": layer})
+                gdal_layer.ResetReading()
+
+                for feature in gdal_layer:
+                    dataset = self.build_data_set(feature, **{"layer": gdal_layer})
                     self._data_sets.append(dataset)
 
     def load_classes(self, file):

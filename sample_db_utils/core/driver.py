@@ -272,6 +272,7 @@ class Shapefile(Driver):
 
     def build_data_set(self, feature, **kwargs):
         """Build data set sample observation"""
+        print("Entrou")
         geometry = feature.GetGeometryRef()
 
         reproject(geometry, self.crs, 4326)
@@ -303,29 +304,40 @@ class Shapefile(Driver):
 
         driver = ogr.GetDriverByName("ESRI Shapefile")
 
-        gdal_file = driver.Open(file, 0)
-        # gdal_file = ogr.Open(file)
+        dataSource = driver.Open(file, 0)
 
-        self.load_classes(gdal_file)
+        # Check to see if shapefile is found.
+        if dataSource is None:
+            print("Could not open {}".format(file))
+        else:
+            print("Open {}".format(file))
 
-        layer = gdal_file.GetLayer()
+            layer = dataSource.GetLayer()
+            featureCount = layer.GetFeatureCount()
+            print("Number of features in {}: {}".format(file, featureCount))
 
-        spatial_ref = layer.GetSpatialRef()
+            spatial_ref = layer.GetSpatialRef()
 
-        if spatial_ref is None:
-            spatial_ref = osr.SpatialReference()
-            spatial_ref.ImportFromEPSG(4326)
-            logging.info('Dataset {} does not have projection. Using EPSG:4326...'.format(file))
+            if spatial_ref is None:
+                spatial_ref = osr.SpatialReference()
+                spatial_ref.ImportFromEPSG(4326)
+                logging.info('Dataset {} does not have projection. Using EPSG:4326...'.format(file))
 
-        self.crs = spatial_ref.ExportToProj4()
+            self.crs = spatial_ref.ExportToProj4()
+
+            for feature in layer:
+                print(feature.GetField("label"))
+                dataset = self.build_data_set(feature, **{"layer": layer})
+
+                if(dataset):
+                    print("Dataset: {}".format(dataset))
+                    self._data_sets.append(dataset)
+
+                else:
+                    raise print("Dataset Error")
 
 
-        for feature in layer:
-           dataset = self.build_data_set(feature, **{"layer": layer})
-           if(dataset):
-               self._data_sets.append(dataset)
-           else:
-               raise print("Dataset error")
+
 
         # for layer_id in range(gdal_file.GetLayerCount()):
         #     layer = gdal_file.GetLayer(layer_id)

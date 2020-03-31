@@ -332,11 +332,32 @@ class Shapefile(Driver):
 
                 self.crs = spatial_ref.ExportToProj4()
 
+                data_sets = []
+                for feature in layer:
+                    dataset = self.build_data_set_teste(feature, self.crs, **{"layer": layer})
+                    data_sets.append(dataset)
+
+                print("\tDataset: {}".format(len(data_sets)))
+
                 for feature in layer:
                     dataset = self.build_data_set(feature, **{"layer": layer})
                     self._data_sets.append(dataset)
 
-                print("\tDataset: {}".format(self._data_sets.append[0]))
+                print("\tDataset: Build")
+
+    def build_data_set_teste(self, feature, crs, **kwargs):
+        """Build data set sample observation"""
+        geometry = feature.GetGeometryRef()
+
+        geom_shapely = geom_from_wkt(
+            geometry.ExportToWkt())
+
+        ewkt = shape.from_shape(geom_shapely, srid=4326)
+
+        classe = feature.GetField("label")
+
+        return {"location": ewkt, "classe": classe}
+
 
     def load_classes(self, file):
         # Retrieves Layer Name from Data set filename

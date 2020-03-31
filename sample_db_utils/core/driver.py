@@ -291,12 +291,14 @@ class Shapefile(Driver):
         collection_date = self.mappings['collection_date'].get('value') or \
             feature.GetField(self.mappings['collection_date']['key'])
 
+        class_id = self.storager.samples_map_id[feature.GetField(self.mappings['class_name'])]
+
         return {
             "start_date": start_date,
             "end_date": end_date,
             "collection_date": collection_date,
             "location": ewkt,
-            "class_id": self.storager.samples_map_id[feature.GetField(self.mappings['class_name'])],
+            "class_id": class_id ,
             "user_id": self.user
         }
 

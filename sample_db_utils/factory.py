@@ -8,7 +8,7 @@
 
 """ Sample DB Utils Factory"""
 
-from sample_db_utils.core.driver import CSV
+from sample_db_utils.core.driver import CSV, Shapefile
 
 
 class DriverFactory:
@@ -25,8 +25,8 @@ class DriverFactory:
     drivers = {
         'text/csv': CSV,
         'application/vnd.ms-excel': CSV,
-        # 'application/zip': Shapefile,
-        # 'application/x-zip-compressed': Shapefile
+        'application/zip': Shapefile,
+        'application/x-zip-compressed': Shapefile
     }
 
     def add(self, driver_name, driver):

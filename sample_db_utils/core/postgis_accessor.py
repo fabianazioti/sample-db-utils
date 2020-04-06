@@ -8,7 +8,6 @@
 
 """ Postgis Acessor Class."""
 
-from sample_db.models import Provenance, Datasets,  Users, make_midias, make_observation
 from lccs_db.models import LucClass, db
 
 

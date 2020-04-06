@@ -31,7 +31,7 @@ install_requires = [
     'psycopg2>=2.8.3',
     'requests>=2.9.1',
     'shapely>=1.6',
-    'sample-db @ git+git://github.com/fabianazioti/sample-db.git@teste-lcc#egg=sample-db',
+     'lccs-db @ git+git://github.com/brazil-data-cube/lccs-db.git#egg=lccs-db',
 ]
 
 extras_require = {

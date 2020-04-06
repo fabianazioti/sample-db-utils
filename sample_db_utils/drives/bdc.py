@@ -16,8 +16,8 @@ class BDC(Shapefile):
 
         mappings = dict(
             class_name="label",
-            start_date=dict(value='31/08/2019'),
-            end_date=dict(value='01/09/2018'),
+            start_date=dict(value='2018-09-01'),
+            end_date=dict(value='2019-08-31'),
             collection_date= None
         )
 

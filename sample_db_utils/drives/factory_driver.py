@@ -10,6 +10,8 @@
 
 from .inSitu import InSitu
 from .bdc import BDC
+from .hugo_tese import HugoTese
+from .hugo import Hugo
 
 
 class DriversFactory:
@@ -18,7 +20,8 @@ class DriversFactory:
     @staticmethod
     def make(driverType, entries, storager, **kwargs):
         """Factory method for creates datasource."""
-        factorys = ["Cerrado", "VMaus", "Canasat", "Lapig", "Fototeca" , "Embrapa", "InSitu",  "BDC"]
+        factorys = ["Cerrado", "VMaus", "Canasat", "Lapig", "Fototeca" , "Embrapa", "InSitu",  "BDC",
+                    "Hugo", "HugoTese"]
 
         assert driverType in factorys
 

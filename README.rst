@@ -15,6 +15,18 @@ Utility Functions for the SAMPLE-DB
         :target: https://github.com/brazil-data-cube/sample-db-utils/blob/master/LICENSE
         :alt: Software License
 
+.. image:: https://travis-ci.org/brazil-data-cube/sample-db-utils.svg?branch=master
+        :target: https://travis-ci.org/brazil-data-cube/sample-db-utils
+        :alt: Build Status
+
+.. image:: https://coveralls.io/repos/github/brazil-data-cube/sample-db-utils/badge.svg?branch=master
+        :target: https://coveralls.io/github/brazil-data-cube/sample-db-utils?branch=master
+        :alt: Code Coverage Test
+
+.. image:: https://readthedocs.org/projects/sample-db-utils/badge/?version=latest
+        :target: https://sample-db-utils.readthedocs.io/en/latest/
+        :alt: Documentation Status
+
 
 .. image:: https://img.shields.io/badge/lifecycle-experimental-orange.svg
         :target: https://www.tidyverse.org/lifecycle/#experimental

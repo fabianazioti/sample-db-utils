@@ -1,3 +1,12 @@
 include *.md
 include LICENSE
+include *.rst
+include *.sh
+include pytest.ini
 recursive-include sample_db_utils *.R
+recursive-include docs *.bat
+recursive-include docs *.css
+recursive-include docs *.py
+recursive-include docs *.rst
+recursive-include docs Makefile
+recursive-include tests *.py

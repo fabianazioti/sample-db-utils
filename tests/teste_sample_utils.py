@@ -6,7 +6,7 @@
 # under the terms of the MIT License; see LICENSE file for more details.
 #
 
-"""Unit-test for WLTS' trajectory operation."""
+"""Unit-test for Sample Database Utils."""
 
 
 class TestSampleUtils:

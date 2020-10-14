@@ -5,19 +5,20 @@
 # Sample Database Utils is free software; you can redistribute it and/or modify it
 # under the terms of the MIT License; see LICENSE file for more details.
 #
-
 """This file contains code utilities of Brazil Data Cubes sampledb."""
 
-from io import IOBase
 import os
+from io import IOBase
 from tempfile import SpooledTemporaryFile
 from zipfile import ZipFile
+
 from osgeo import osr
 from werkzeug.datastructures import FileStorage
 
+
 def validate_mappings(mappings):
-    """
-    Validates a class mappings of Observation
+    """Validate a class mappings of Observation.
+
     A mapping consists in a dictionary which maps the expected keys with
     provided keys in dataset.
     The well-known properties are:
@@ -58,10 +59,12 @@ def validate_mappings(mappings):
     set_default_value_for('end_date', mappings)
     set_default_value_for('collect_date_date', mappings)
 
+
 def reproject(geom, source_srid, target_srid):
-    """
-    Reproject a geometry to srid provided
+    """Reproject a geometry to srid provided.
+
     It may throws exception when SRID is invalid
+
     Args:
         geom (ogr.Geometry): Geometry
         source_srid (int): Input SRID
@@ -86,9 +89,10 @@ def reproject(geom, source_srid, target_srid):
 
 
 def unzip(stream, destination):
-    """
-    Uncompress the zip file to the destination. The input
-    may be a file or bytes representing opened file
+    """Uncompress the zip file to the destination.
+
+    The input may be a file or bytes representing opened file
+
     Args:
         stream (str, io.Bytes) - File to extract
         destination (str) - Destination directory
@@ -101,8 +105,7 @@ def unzip(stream, destination):
 
 
 def is_stream(entry):
-    """Returns if the provided entry is readable as stream-like"""
-
+    """Return if the provided entry is readable as stream-like."""
     return isinstance(entry, IOBase) or \
            isinstance(entry, SpooledTemporaryFile) or \
            isinstance(entry, FileStorage)

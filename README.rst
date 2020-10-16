@@ -6,9 +6,9 @@
     under the terms of the MIT License; see LICENSE file for more details.
 
 
-============================================================================
+====================================
 Utility Functions for the SAMPLE-DB
-============================================================================
+====================================
 
 
 .. image:: https://img.shields.io/badge/license-MIT-green

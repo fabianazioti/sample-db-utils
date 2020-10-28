@@ -151,7 +151,7 @@ class CSV(Driver):
         end_date = self.mappings['end_date'].get('value') or \
                    geocsv[self.mappings['end_date']['key']]
 
-        collection_date = self.mappings['collection_date'].get('collection_date') or \
+        collection_date = self.mappings['collection_date'].get('value') or \
                           geocsv[self.mappings['collection_date']['key']]
 
         geocsv['user_id'] = self.user
@@ -202,7 +202,6 @@ class CSV(Driver):
                 "description": class_name,
                 "code": class_name,
                 "class_system_id": self.system.id,
-                # "user_id": self.user
             }
 
             samples_to_save.append(sample_class)
@@ -294,8 +293,8 @@ class Shapefile(Driver):
         end_date = self.mappings['end_date'].get('value') or \
                    feature.GetField(self.mappings['end_date']['key'])
 
-        # TODO
-        collection_date = self.mappings['collection_date']
+        collection_date = self.mappings['collection_date'].get('value') or \
+                          feature.GetField(self.mappings['collection_date']['key'])
 
         return {
             "start_date": start_date,

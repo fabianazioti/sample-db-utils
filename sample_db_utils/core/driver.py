@@ -24,8 +24,8 @@ from shapely.wkt import loads as geom_from_wkt
 from werkzeug.datastructures import FileStorage
 
 from sample_db_utils.core.postgis_accessor import PostgisAccessor
-from sample_db_utils.core.utils import (is_stream, reproject, unzip,
-                                        validate_mappings)
+from sample_db_utils.core.utils import (get_date_from_str, is_stream,
+                                        reproject, unzip, validate_mappings)
 
 
 class Driver(metaclass=ABCMeta):
@@ -148,11 +148,17 @@ class CSV(Driver):
         start_date = self.mappings['start_date'].get('value') or \
                      geocsv[self.mappings['start_date']['key']]
 
+        start_date = get_date_from_str(start_date)
+
         end_date = self.mappings['end_date'].get('value') or \
                    geocsv[self.mappings['end_date']['key']]
 
+        end_date = get_date_from_str(end_date)
+
         collection_date = self.mappings['collection_date'].get('value') or \
                           geocsv[self.mappings['collection_date']['key']]
+
+        collection_date = get_date_from_str(collection_date)
 
         geocsv['user_id'] = self.user
         geocsv['start_date'] = start_date
@@ -295,6 +301,10 @@ class Shapefile(Driver):
 
         collection_date = self.mappings['collection_date'].get('value') or \
                           feature.GetField(self.mappings['collection_date']['key'])
+
+        start_date = get_date_from_str(start_date)
+        end_date = get_date_from_str(end_date)
+        collection_date = get_date_from_str(collection_date)
 
         return {
             "start_date": start_date,

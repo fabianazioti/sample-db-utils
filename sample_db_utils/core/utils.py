@@ -8,6 +8,7 @@
 """This file contains code utilities of Brazil Data Cubes sampledb."""
 
 import os
+from datetime import datetime
 from io import IOBase
 from tempfile import SpooledTemporaryFile
 from zipfile import ZipFile
@@ -57,7 +58,7 @@ def validate_mappings(mappings):
 
     set_default_value_for('start_date', mappings)
     set_default_value_for('end_date', mappings)
-    set_default_value_for('collect_date_date', mappings)
+    set_default_value_for('collection_date', mappings)
 
 
 def reproject(geom, source_srid, target_srid):
@@ -109,3 +110,15 @@ def is_stream(entry):
     return isinstance(entry, IOBase) or \
            isinstance(entry, SpooledTemporaryFile) or \
            isinstance(entry, FileStorage)
+
+
+def get_date_from_str(date):
+    """Build date from str."""
+    date = date.replace('/', '-')
+
+    try:
+        date = datetime.strptime(date, '%Y-%m-%d').strftime('%Y-%m-%d')
+    except ValueError:
+        date = datetime.strptime(date, '%d-%m-%Y').strftime('%Y-%m-%d')
+
+    return date
